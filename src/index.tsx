@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import {DefaultTypelessProvider} from "typeless";
+import CounterModule from "./features/counter/module";
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <DefaultTypelessProvider>
+    <CounterModule/>
+  </DefaultTypelessProvider>,
   document.getElementById('root')
 );
 

@@ -1,46 +1,50 @@
-# Getting Started with Create React App
+# typeless 入門
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+* features/counter/symbol.ts
+    * HMR を使う場合は Symbol を別ファイルで定義する必要がある。不要な場合は interface.ts で定義するでよい
+* features/counter/interface.ts
+    * 他のモジュールは I/F ファイルの object/types を参照することでのみやりとりしなければならない。
+    * このファイルはできるだけ小さくするべきであり、外部ライブラリとの依存は避ける
 
-## Available Scripts
+## 疑問点
+`//?:` でマークしたのでそれで検索する
 
-In the project directory, you can run:
+### HMR とは？
+Hot Module Replacement
 
-### `yarn start`
+### useModule とは
+ref. https://typeless.js.org/api/createmodule
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+まず、createModule についてまとめる。 指定された symbol に新しい module を作成する。symbol と module は正確に 1:1 対応。 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```ts
+// アクションあり
+const [handle, Actions] = createModule(symbol)
+  .withActions(actionMap);
+// 状態あり
+const [handle, getState] = createModule(symbol)
+  .withState<MyState>();
+// アクションと状態あり
+const [handle, Actions, getState] = createModule(symbol)
+  .withActions(actionMap)
+  .withState<MyState>();
+```
 
-### `yarn test`
+withActions は module にアクションを追加する。関数は入力引数を `payload` プロパティを持つオブジェクトにラップする必要があり、引数がいらない場合は null を指定する。
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+上の `handle` が `useModule` に当たる。**useModule によって自動的にディスパッチされる特別なライフサイクルアクションがある**。アクションは createActions で定義したときだけディスパッチされる。
 
-### `yarn build`
+### useModule.epic とは
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### useModule.reducer とは
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### {count} とは
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+```ts
+useModule
+  ...
+  .on(CounterActions.countDone, (state, {count}) => { //?: {count} とは
+    state.isLoading = false;
+    state.count += count;
+  });
+```
