@@ -10,6 +10,7 @@
     "@types/node": "^16.7.13",
     "@types/react": "^17.0.20",
     "@types/react-dom": "^17.0.9",
+    "parcel-bundler": "^1.12.5",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "5.0.0",
@@ -19,7 +20,8 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "prestart": "rm -rf .cache dist && tsc",
+    "start": "parcel ./src/*/index.html",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
