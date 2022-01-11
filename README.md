@@ -44,13 +44,25 @@ withActions は module にアクションを追加する。関数は入力引数
 
 ### {count} とは
 
+on() の fn: OnHandler の定義によると (state, payload, action) で、`payload: { count }` をやってるってだけ。`state.count += payload.count` ともできる。
+
 ```ts
 useModule
-  ...
+  .reducer(initialState)
   .on(CounterActions.countDone, (state, {count}) => { //?: {count} とは
     state.isLoading = false;
     state.count += count;
   });
+```
+
+```ts
+  on<T extends AC>(actionCreator: T, fn: OnHandler<S, T>)
+
+  type OnHandler<S, T extends AC> = (
+    state: S,
+    payload: ExtractPayload<ReturnType<T>>,
+    action: Flatten<ReturnType<T> & { type: string }>
+  ) => void;
 ```
 
 ### Epic について
@@ -59,7 +71,7 @@ useModule
   * 子の epic を追加する
 * on(actionCreator, handler)
   * createModule で作られた action creator を紐づける。下の例の `UserActions.loadUser` がそれ
-  * **handler がよくわからん**
+  * **handler がよくわからん**。`action$` とは。
     * handler: (payload, { action$ }, action) => EpicResult
 * onMany(actionCreators[], handler)
 
@@ -75,4 +87,16 @@ handle
   .on(UserActions.loadUser, ({ id }, { getState }) => {
     ...
   });
+```
+
+### Rx とは
+e.g. 
+
+```ts
+import * as Rx from 'typeless/rx';
+
+function fetchCatData() {
+  return Rx.of({
+    ...
+  }).pipe()
 ```
