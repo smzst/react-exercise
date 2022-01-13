@@ -11050,6 +11050,11 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
+typeless-router@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/typeless-router/-/typeless-router-1.7.0.tgz#3252d1c13b31950808279d909f9c5f00b2eeeffc"
+  integrity sha512-fstCIDd8eEUV2VZFonVLGqok1nIB1Z4OUEL8iOJF/OJi4UykwrM8+Q+18XA9pcxG4ypRBrEfNvkAw6ZKfBXAtw==
+
 typeless@^1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/typeless/-/typeless-1.7.0.tgz#61fa14a318f40e12f5fdee01c7927d31b48010b5"
