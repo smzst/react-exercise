@@ -1,6 +1,7 @@
 import {CatActions, CatState, useModule} from "./interface";
 import * as Rx from 'typeless/rx';
 import {CatView} from "./components/CatView";
+import React from "react";
 
 function fetchCatData() {
   return Rx.of({

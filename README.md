@@ -17,6 +17,8 @@
 
 ### HMR とは？
 Hot Module Replacement
+* https://qiita.com/haradakunihiko/items/40486ec2b6b9aea119bb
+* https://medium.com/@hokan_dev/react%E3%81%A7hmr%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95-aa3d851ce1b5
 
 ### useModule とは
 ref. https://typeless.js.org/api/createmodule
