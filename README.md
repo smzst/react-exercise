@@ -9,6 +9,12 @@
 ## 疑問点
 `//?:` でマークしたのでそれで検索する
 
+* React のコード分割について理解を深める
+  * https://ja.reactjs.org/docs/code-splitting.html#reactlazy
+  * example の real-api で Suspense と Error Boundary 試せそう
+* `action$` みたいなのがなんなのか
+  * 「Epic について」参照
+
 ### HMR とは？
 Hot Module Replacement
 
@@ -100,3 +106,29 @@ function fetchCatData() {
     ...
   }).pipe()
 ```
+
+### React.lazy(() => import('...')) とは
+
+https://ja.reactjs.org/docs/code-splitting.html#reactlazy
+
+動的インポートを通常のコンポーネントとしてレンダーできる。lazy() は、default export な React コンポーネントの関数を受け取る
+```ts
+import Component from './Component';
+const Component = React.lazy(() => import('./Component')); 
+```
+
+遅延コンポーネントは Suspense コンポーネント内でレンダーされる必要がある。fallback 属性に遅延コンポーネントが解決されるまでに表示したいものを渡せる
+```tsx
+const OtherComponent = React.lazy(() => import('./OtherComponent'));
+
+function MyComponent() {
+  return (
+    <div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <OtherComponent/>
+      </Suspense>
+    </div>
+  )
+}
+```
+
