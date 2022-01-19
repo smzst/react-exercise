@@ -16,6 +16,7 @@
     "react-scripts": "5.0.0",
     "rxjs": "^6.6.7",
     "typeless": "^1.7.0",
+    "typeless-form": "^1.7.0",
     "typeless-router": "^1.7.0",
     "typescript": "^4.4.2",
     "web-vitals": "^2.1.0"

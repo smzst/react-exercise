@@ -14,6 +14,10 @@
   * example の real-api で Suspense と Error Boundary 試せそう
 * `action$` みたいなのがなんなのか
   * 「Epic について」参照
+* 「コンポーネントコンポジション」「レンダープロップ」について具体的にコードを書いて理解を深めたい
+  * https://ja.reactjs.org/docs/composition-vs-inheritance.html
+  * https://ja.reactjs.org/docs/context.html#before-you-use-context
+  * https://ja.reactjs.org/docs/render-props.html
 
 ### HMR とは？
 Hot Module Replacement
@@ -134,3 +138,11 @@ function MyComponent() {
 }
 ```
 
+### useContext とは
+まず Context とは、ある React コンポーネントのツリーに対してグローバルとみなせるデータを共有するために設計されている。たとえば、認証済みのユーザー・テーマ・優先言語・ロケール・データキャッシュの管理など。なんらかのデータがネストレベルの異なる多くのコンポーネントからアクセスできる必要があるときに使用するもの。Context を使用することでコンポーネントの再利用性が低くなることに注意する必要がある。
+
+バケツリレーが避けたいのであれば、コンポーネントコンポジションを使うことがシンプルな解決策となる。実際に props を使ってるコンポーネントを親が作ってコンポーネント自体を props に渡すというもの。 \
+cf. https://ja.reactjs.org/docs/context.html#before-you-use-context
+
+
+### FormContext の touched, errors, actions など
